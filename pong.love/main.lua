@@ -1,21 +1,4 @@
---[[
-    GD50 2018
-    Pong Remake
 
-    -- Main Program --
-
-    Author: Colton Ogden
-    cogden@cs50.harvard.edu
-
-    Originally programmed by Atari in 1972. Features two
-    paddles, controlled by players, with the goal of getting
-    the ball past your opponent's edge. First to 10 points wins.
-
-    This version is built to more closely resemble the NES than
-    the original Pong machines or the Atari 2600 in terms of
-    resolution, though in widescreen (16:9) so it looks nicer on 
-    modern systems.
-]]
 
 -- push is a library that will allow us to draw our game at a virtual
 -- resolution, instead of however large our window is; used to provide
@@ -68,7 +51,7 @@ function love.load()
     largeFont = love.graphics.newFont('font.ttf', 16)
     scoreFont = love.graphics.newFont('font.ttf', 32)
     love.graphics.setFont(smallFont)
-    
+
     -- initialize our virtual resolution, which will be rendered within our
     -- actual window no matter its dimensions
     push:setupScreen(VIRTUAL_WIDTH, VIRTUAL_HEIGHT, WINDOW_WIDTH, WINDOW_HEIGHT, {
@@ -79,10 +62,10 @@ function love.load()
 
     -- set up our sound effects; later, we can just index this table and
     -- call each entry's `play` method
-    sounds = {
-        ['paddle_hit'] = love.audio.newSource('sounds/paddle_hit.wav'),
-        ['score'] = love.audio.newSource('sounds/score.wav'),
-        ['wall_hit'] = love.audio.newSource('sounds/wall_hit.wav')
+  sounds = {
+        ['paddle_hit'] = love.audio.newSource('sounds/paddle_hit.wav', 'static'),    -- newSource takes two arguments filename and sound type
+        ['score'] = love.audio.newSource('sounds/score.wav', 'static'),
+        ['wall_hit'] = love.audio.newSource('sounds/wall_hit.wav', 'static')
     }
 
     -- initialize our player paddles; make them global so that they can be
@@ -170,10 +153,10 @@ function love.update(dt)
             -- midpoint it hits; the opposite is true for below the midpoint,
             -- only the dy should be positive
             if ball.y < player1.y + player1.height / 2 then
-                ball.dy = -math.random(50, 100) * (player1.y + 
+                ball.dy = -math.random(50, 100) * (player1.y +
                     (player1.height / 2)) / ball.y
             else
-                ball.dy = math.random(50, 100) * 
+                ball.dy = math.random(50, 100) *
                     (player1.y + player1.height) / ball.y
             end
 
@@ -184,10 +167,10 @@ function love.update(dt)
             ball.x = player2.x - 4
 
             if ball.y < player2.y + player2.height / 2 then
-                ball.dy = -math.random(50, 100) * (player2.y + 
+                ball.dy = -math.random(50, 100) * (player2.y +
                     (player2.height / 2)) / ball.y
             else
-                ball.dy = math.random(50, 100) * 
+                ball.dy = math.random(50, 100) *
                     (player2.y + player2.height) / ball.y
             end
 
@@ -305,7 +288,7 @@ function love.keypressed(key)
     if key == 'escape' then
         -- the function LÖVE2D uses to quit the application
         love.event.quit()
-    end 
+    end
 
     -- add to our table of keys pressed this frame
     love.keyboard.keysPressed[key] = true
@@ -332,8 +315,8 @@ function love.draw()
     -- begin drawing with push, in our virtual resolution
     push:apply('start')
 
-    love.graphics.clear(40, 45, 52, 255)
-    
+    --love.graphics.clear(40, 45, 52, 255)
+
     -- render different things depending on which part of the game we're in
     if gameState == 'start' then
         -- UI messages
@@ -343,7 +326,7 @@ function love.draw()
     elseif gameState == 'serve' then
         -- UI messages
         love.graphics.setFont(smallFont)
-        love.graphics.printf('Player ' .. tostring(servingPlayer) .. "'s serve!", 
+        love.graphics.printf('Player ' .. tostring(servingPlayer) .. "'s serve!",
             0, 10, VIRTUAL_WIDTH, 'center')
         love.graphics.printf('Press Enter to serve!', 0, 20, VIRTUAL_WIDTH, 'center')
     elseif gameState == 'play' then
@@ -359,7 +342,7 @@ function love.draw()
 
     -- show the score before ball is rendered so it can move over the text
     displayScore()
-    
+
     player1:render()
     player2:render()
     ball:render()
