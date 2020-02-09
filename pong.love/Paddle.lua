@@ -1,15 +1,4 @@
---[[
-    GD50 2018
-    Pong Remake
 
-    -- Paddle Class --
-
-    Author: Colton Ogden
-    cogden@cs50.harvard.edu
-
-    Represents a paddle that can move up and down. Used in the main
-    program to deflect the ball back toward the opponent.
-]]
 
 Paddle = Class{}
 
@@ -58,5 +47,6 @@ end
     newest version of LÖVE2D, you can even draw rounded rectangles!
 ]]
 function Paddle:render()
+    love.graphics.setColor(1,0,1,1)
     love.graphics.rectangle('fill', self.x, self.y, self.width, self.height)
 end

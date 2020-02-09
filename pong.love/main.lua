@@ -107,6 +107,7 @@ end
     about calling out to `push` to handle the resizing. Takes in a `w` and
     `h` variable representing width and height, respectively.
 ]]
+
 function love.resize(w, h)
     push:resize(w, h)
 end
