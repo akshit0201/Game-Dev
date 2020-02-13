@@ -1,17 +1,5 @@
 --[[
-    GD50
-    Pokemon
 
-    Author: Colton Ogden
-    cogden@cs50.harvard.edu
-
-    Few franchises have achieved the degree of fame as Pokemon, short for "Pocket Monsters",
-    a Japanese monster-catching phenomenon that took the world by storm in the late 90s. Even
-    to this day, Pokemon is hugely successful, with games, movies, and various other forms of
-    merchandise selling like crazy. The game formula itself is an addicting take on the JRPG,
-    where the player can not only fight random creatures in the wild but also recruit them to
-    be in his or her party at all times, where they can level up, learn new abilities, and even
-    evolve.
 
     This proof of concept demonstrates basic GUI usage, random encounters, creatures that the
     player can fight and catch with their own creatures, and basic NPC interaction in the form of
