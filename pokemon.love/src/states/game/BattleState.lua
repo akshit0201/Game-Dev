@@ -1,10 +1,4 @@
---[[
-    GD50
-    Pokemon
 
-    Author: Colton Ogden
-    cogden@cs50.harvard.edu
-]]
 
 BattleState = Class{__includes = BaseState}
 
@@ -23,9 +17,9 @@ function BattleState:init(player)
         }
     }
 
-    self.playerSprite = BattleSprite(self.player.party.pokemon[1].battleSpriteBack, 
+    self.playerSprite = BattleSprite(self.player.party.pokemon[1].battleSpriteBack,
         -64, VIRTUAL_HEIGHT - 128)
-    self.opponentSprite = BattleSprite(self.opponent.party.pokemon[1].battleSpriteFront, 
+    self.opponentSprite = BattleSprite(self.opponent.party.pokemon[1].battleSpriteFront,
         VIRTUAL_WIDTH, 8)
 
     -- health bars for pokemon
@@ -73,7 +67,7 @@ function BattleState:init(player)
 end
 
 function BattleState:enter(params)
-    
+
 end
 
 function BattleState:exit()
@@ -134,15 +128,15 @@ function BattleState:triggerSlideIn()
 end
 
 function BattleState:triggerStartingDialogue()
-    
+
     -- display a dialogue first for the pokemon that appeared, then the one being sent out
     gStateStack:push(BattleMessageState('A wild ' .. tostring(self.opponent.party.pokemon[1].name ..
         ' appeared!'),
-    
+
     -- callback for when the battle message is closed
     function()
         gStateStack:push(BattleMessageState('Go, ' .. tostring(self.player.party.pokemon[1].name .. '!'),
-    
+
         -- push a battle menu onto the stack that has access to the battle state
         function()
             gStateStack:push(BattleMenuState(self))
